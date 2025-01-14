@@ -4,18 +4,16 @@ from conan.tools.files import rm, rmdir
 
 # get recipes from a git repo
 class GitRecipes:
-    url = ""
-    source = ""
-    target = ""
 
-    def __init__(self, cf, url, source, target):
+    def __init__(self, cf, url, source, target, remotename):
         self.url = url
         self.source = source
         self.target = target
         self.cf = cf
+        self.remotename = remotename
 
         # use git @hey: make this a custom command or something
-        rm(self, "*", ".recipes", recursive=True, excludes="*.py")
+        rm(self, "*", ".recipes", recursive=True)
         rmdir(self, ".recipes")
         self.git = Git(cf)
         self.git.run(
@@ -35,8 +33,12 @@ class GitRecipes:
         self.git.run(cmd="checkout")
 
         # clean up some markdown files
-        rm(self, "*", ".recipes", excludes="*.py")
-        self.cf.run("conan remote add conan-ex .recipes --force --index=0")
+        rm(self, "*", self.target)
+        self.cf.run(
+            "conan remote add {} {} --force --index=0".format(
+                self.remotename, self.target
+            )
+        )
 
         # add as remote put this in conanfile
         # self.run("conan remote add conan-ex .recipes --force --index=0")
@@ -56,3 +58,4 @@ class GitRecipes:
         # self.run(
         #    "conan remote add kolbbond-conan-recipes ~/.conan2/kolbbond-conan-recipes --force --index=0"
         # )
+

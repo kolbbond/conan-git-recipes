@@ -21,14 +21,23 @@ You can download within conanfile.py and import with
 Then to call 
 
 ``` 
-        # setup repo and recipe directory (source) and target directory
+        # setup repo and recipe directory (source), target directory, and remote name
         gr = pkg.GitRecipes(  
             cf=self,  
             url="https://github.com/kolbbond/conan-center-index.git",  
             source="recipes",  
             target=".recipes",  
+            remotename="conan_example"
         )  
         gr.add_checkout("corrade")  
         gr.add_checkout("magnum")  
         gr.checkout()  
+```
+
+`checkout(name)` adds a new local remote "conan_example" to conan (check with `conan list`)
+```
+        self.cf.run(
+            "conan remote add {} {} --force --index=0".format(
+                self.remotename, self.target)
+        )
 ```
