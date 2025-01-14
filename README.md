@@ -18,7 +18,8 @@ You can download within conanfile.py and import with
         pkg = SourceFileLoader("gitrecipes", ".recipes/gitrecipes.py").load_module()  
 ```
 
-Then to call 
+Then to call and checkout recipes "corrade" and "magnum"
+`checkout()` adds a new local remote "conan_example" to conan (check with `conan list`)
 
 ``` 
         # setup repo and recipe directory (source), target directory, and remote name
@@ -31,13 +32,7 @@ Then to call
         )  
         gr.add_checkout("corrade")  
         gr.add_checkout("magnum")  
+
         gr.checkout()  
 ```
 
-`checkout(name)` adds a new local remote "conan_example" to conan (check with `conan list`)
-```
-        self.cf.run(
-            "conan remote add {} {} --force --index=0".format(
-                self.remotename, self.target)
-        )
-```
