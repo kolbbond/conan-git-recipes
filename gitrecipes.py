@@ -15,7 +15,7 @@ class GitRecipes:
         self.cf = cf
 
         # use git @hey: make this a custom command or something
-        rm(self, "*", ".recipes", recursive=True)
+        rm(self, "*", ".recipes", recursive=True, excludes="*.py")
         rmdir(self, ".recipes")
         self.git = Git(cf)
         self.git.run(
@@ -35,7 +35,7 @@ class GitRecipes:
         self.git.run(cmd="checkout")
 
         # clean up some markdown files
-        rm(self, "*", ".recipes")
+        rm(self, "*", ".recipes", excludes="*.py")
         self.cf.run("conan remote add conan-ex .recipes --force --index=0")
 
         # add as remote put this in conanfile
