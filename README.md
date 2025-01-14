@@ -2,7 +2,7 @@
 
 Use conan recipes from git repos.
 
-Put the below in `source()`
+Put the below in `source()` and run `conan source .` 
 
 You can download within conanfile.py and import with 
 
@@ -18,7 +18,7 @@ You can download within conanfile.py and import with
         pkg = SourceFileLoader("gitrecipes", ".recipes/gitrecipes.py").load_module()  
 ```
 
-Then to call and checkout recipes "corrade" and "magnum"
+Then to call and checkout recipes "corrade" and "magnum"  
 `checkout()` adds a new local remote "conan_example" to conan (check with `conan list`)
 
 ``` 
