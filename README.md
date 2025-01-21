@@ -5,7 +5,11 @@ Use conan recipes from git repos.
 Put the below in `source()` and run `conan source .` 
 
 You can place the gitrecipes.py in some local directory 
-` wget -O scripts/gitrecipes.py https://raw.githubusercontent.com/kolbbond/conan-git-recipes/refs/heads/master/gitrecipes.py `
+```
+wget -O scripts/gitrecipes.py https://raw.githubusercontent.com/kolbbond/conan-git-recipes/refs/heads/master/gitrecipes.py 
+
+```
+
 You can download within conanfile.py and import with 
 
 ```
